@@ -1,7 +1,9 @@
 <section class="section section-heading">
     <div class="container">
         <div class="content">
-            <h5><i class="far fa-folder"></i><%= __('common.categories') %></h5>
+            <h5><svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-folder"></use>
+            </svg><%= __('common.categories') %></h5>
         </div>
     </div>
 </section>
@@ -10,7 +12,10 @@
         <div class="columns is-variable is-1 is-multiline is-mobile">
             <% (page._categories || page.categories).forEach(category => {%>
             <span class="column is-narrow">
-                <a class="tag is-light article-tag" href="<%= url_for(category.path) %>"><%= category.name %>&nbsp;(<%= category.posts.length%>)</a>
+                
+                <a class="tag is-light article-tag" href="<%= url_for(category.path) %>index.html"><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-Bookmark"></use>
+                </svg><%= category.name %><i class="article-tag-num"><%= category.posts.length%></i></a>
             </span>
             <% }) %>
         </div>

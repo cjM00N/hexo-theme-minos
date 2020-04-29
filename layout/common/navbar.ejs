@@ -40,13 +40,17 @@
         <div class="navbar-menu navbar-end">
             <% if (has_config('search')) { %>
             <a class="navbar-item search" title="<%= __('nav.search') %>" href="javascript:;">
-                <i class="fas fa-search"></i>
+                <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-search1"></use>
+                </svg>
             </a>
             <% } %>
             <% if (has_config('toc') && get_config('toc') === true && typeof(page.content) !== 'undefined') { %>
-            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-tablet-only toc">
                 <a class="navbar-item" title="<%= __('nav.toc') %>">
-                    <i class="fa fa-list"></i>
+                    <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-list"></use>
+                    </svg>
                 </a>
                 <div class="navbar-dropdown is-right">
                     <% let lastHeading = null; %>
@@ -67,7 +71,9 @@
                 <% if (typeof(link) === 'string') { %>
                 <%= name %>
                 <% } else { %>
-                <i class="<%= link.icon %>"></i>
+                <svg class="icon" aria-hidden="true">
+                <use xlink:href="#<%= link.icon %>"></use>
+                </svg>
                 <% } %>
             </a>
                <% } %>

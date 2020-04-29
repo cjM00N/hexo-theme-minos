@@ -1,7 +1,9 @@
 <section class="section section-heading">
     <div class="container">
         <div class="content">
-            <h5>#<%= __('common.tags') %></h5>
+            <h5><svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-tag"></use>
+            </svg></i><%= __('common.tags') %></h5>
         </div>
     </div>
 </section>
@@ -10,7 +12,9 @@
         <div class="columns is-variable is-1 is-multiline is-mobile">
             <% (page._tags || page.tags).forEach(tag => {%>
             <span class="column is-narrow">
-                <a class="tag is-light article-tag" href="<%= url_for(tag.path) %>">#<%= tag.name %>&nbsp;(<%= tag.posts.length%>)</a>
+                <a class="tag is-light article-tag" href="<%= url_for(tag.path) %>index.html"><svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-Bookmark"></use>
+                </svg><%= tag.name %><i class="article-tag-num"><%= tag.posts.length%></i></a>
             </span>
             <% }) %>
         </div>

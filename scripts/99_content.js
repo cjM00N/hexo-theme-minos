@@ -89,8 +89,9 @@ hexo.extend.helper.register('format_date', injectMomentLocale(function (date) {
  * Format date to string with year.
  */
 hexo.extend.helper.register('format_date_full', injectMomentLocale(function (date) {
-    return moment(date).format('MMM D YYYY');
+    return moment(date).format('ll');
 }));
+
 
 /**
  * Get moment.js supported page locale
@@ -131,7 +132,7 @@ hexo.extend.helper.register('toc_list', (content) => {
         if ($('h' + i).length > 0) {
             levelTags.push('h' + i);
         }
-        if (levelTags.length === 3) {
+        if (levelTags.length === 2) {
             break;
         }
     }

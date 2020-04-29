@@ -21,22 +21,22 @@ function pagination(c, m) {
     for (let i of range) {
         if (l) {
             if (i - l === 2) {
-                elements.push(`<li><a class="pagination-link" href="${ link_url(l + 1) }">${ l + 1 }</a></li>`);
+                elements.push(`<li><a class="pagination-link" href="${ link_url(l + 1) }index.html">${ l + 1 }</a></li>`);
             } else if (i - l !== 1) {
                 elements.push(`<li><span class="pagination-ellipsis">&hellip;</span></li>`);
             }
         }
-        elements.push(`<li><a class="pagination-link${ c === i ? ' is-current' : ''}" href="${ link_url(i) }">${ i }</a></li>`);
+        elements.push(`<li><a class="pagination-link${ c === i ? ' is-current' : ''}" href="${ link_url(i) }index.html">${ i }</a></li>`);
         l = i;
     }
     return elements;
 } %>
 <nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
     <div class="pagination-previous<%= page.current > 1 ? '' : ' is-invisible is-hidden-mobile' %>">
-        <a href="<%= link_url(page.current - 1) %>"><%= __('nav.prev') %></a>
+        <a href="<%= link_url(page.current - 1) %>index.html"><%= __('nav.prev') %></a>
     </div>
     <div class="pagination-next<%= page.current < page.total ? '' : ' is-invisible is-hidden-mobile' %>">
-        <a href="<%= link_url(page.current + 1) %>"><%= __('nav.next') %></a>
+        <a href="<%= link_url(page.current + 1) %>index.html"><%= __('nav.next') %></a>
     </div>
     <ul class="pagination-list is-hidden-mobile">
         <% pagination(page.current, page.total).forEach(element => { %>

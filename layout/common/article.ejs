@@ -1,21 +1,41 @@
 <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         <% if (index) { %>
-            <a href="<%- url_for(post.link ? post.link : post.path) %>" itemprop="url"><%= post.title %></a>
+        <a href="<%- url_for(post.link ? post.link : post.path) %>" itemprop="url"><%= post.title %></a>
         <% } else { %>
-            <%= post.title %>
+        <%= post.title %>
         <% } %>
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><%= format_date_full(post.date) %></time>
+            <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-clock"></use>
+            </svg>
+            <% if (!index && (format_date_full(post.date) != format_date_full(post.updated))) { %>
+            <time datetime="<%= date_xml(post.date) %>"
+                itemprop="datePublished"><%= format_date_full(post.date) %></time>
+            <% } else { %>
+            <time datetime="<%= date_xml(post.date) %>"
+                itemprop="datePublished"><%= format_date_full(post.date) %></time>
+            <% } %>
         </span>
         <% if (post.categories && post.categories.length){ %>
         <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
+            <span class="article-meta-separator">/</span>
+            <svg class="icon" aria-hidden="true" style="margin-right: 0px;">
+            <use xlink:href="#icon-folder"></use>
+            </svg>
             <%- (post._categories || post.categories).map(category =>
-                    `<a class="article-category-link" href="${url_for(category.path)}">${category.name}</a>`)
+                    `<a class="article-category-link" href="${url_for(category.path)}index.html">${category.name}</a>`)
                     .join('<span>></span>') %>
+        </span>
+        <% } %>
+        <% if (!index && (!has_config('toc') || get_config('toc') === true)){ %>
+        <span class="column is-narrow article-category">
+            <span class="article-meta-separator">/</span>
+            <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-hot"></use>
+            </svg>热度: <%- leancloud_counter({ action:'inc' }) %><%- leancloud_counter_script() %> ℃
         </span>
         <% } %>
         <% if (!has_config('article.readtime') || get_config('article.readtime') === true) { %>
@@ -27,20 +47,23 @@
         <% } %>
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    <% if (post.excerpt && index){ %>
+        <% if (post.excerpt && index){ %>
         <%- post.excerpt %>
         <p class="article-more-link">
             <a href="<%- url_for(post.path) %>#more"><%= __('article.read_more') %></a>
         </p>
-    <% } else { %>
+        <% } else if(!index) { %>
         <%- post.content %>
-    <% } %>
+        <% } %>
     </div>
     <% if (!index && post.tags && post.tags.length){ %>
     <div class="columns is-variable is-1 is-multiline is-mobile">
-    <% (post._tags || post.tags).forEach(tag => { %>
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="<%- url_for(tag.path) %>">#<%= tag.name %></a></span>
-    <% }) %>
+        <% (post._tags || post.tags).forEach(tag => { %>
+        <span class="column is-narrow"><a class="tag is-light article-tag"
+                href="<%- url_for(tag.path) %>index.html"><svg class="icon" aria-hidden="true" style="margin-right: 3px;">
+                <use xlink:href="#icon-Bookmark"></use>
+                </svg><%= tag.name %></a></span>
+        <% }) %>
     </div>
     <% } %>
     <% if (!index && (post.prev || post.next)) { %>
@@ -69,5 +92,12 @@
 <div class="comments">
     <h3 class="title is-4"><%= __('article.comments') %></h3>
     <%- partial('comment/' + get_config('comment.type')) %>
+</div>
+<% } %>
+<% if (!index) { %>
+<div id="totop">
+    <a title="Top"><svg class="icon" aria-hidden="true">
+    <use xlink:href="#icon-TOP"></use>
+    </svg></a>
 </div>
 <% } %>

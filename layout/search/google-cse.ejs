@@ -3,7 +3,9 @@
     <div class="searchbox-container">
         <div class="searchbox-input-wrapper">
             <input type="text" class="searchbox-input" placeholder="<%= __('search.hint') %>" />
-            <span class="searchbox-close searchbox-selectable"><i class="fa fa-times-circle"></i></span>
+            <span class="searchbox-close searchbox-selectable"><svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-process"></use>
+            </svg></span>
         </div>
         <% if (has_config('search.cx')) { %>
         <div class="searchbox-result-wrapper">
