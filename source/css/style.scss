@@ -7,7 +7,9 @@ $img-shadow: 0 3px 5px rgba(0,0,0,.1);
     background-color: rgba(255,235,20,.7);;
     color:rgba(0,0,0,.87);
 }
-
+html {
+    background: #f6f6f7;
+}
 body, button, input, select, textarea {
     font-family: $family-serif!important;
 }
@@ -36,7 +38,7 @@ a.tag.article-tag {
     padding: 0 14px;
     display: inline-block;
     text-align: center;
-    background: transparent;
+    background: #fff;
     height: 38px;
     min-width: 80px;
     line-height: 38px;
@@ -48,7 +50,7 @@ a.tag.article-tag {
 }
 
 i.article-tag-num {
-    color: #007cfc!important;
+    color: #0a6dcf!important;
     font-style: normal;
     margin-left: 10px;
 }
@@ -59,8 +61,8 @@ i.article-tag-num {
 
 @media screen and (min-width: 1024px) {
     .container {
-        max-width: 900px;
-        width: 900px;
+        max-width: 1000px;
+        width: 1000px;
     }
 
     .navbar.is-transparent .navbar-dropdown a.navbar-item:hover {
@@ -72,8 +74,12 @@ i.article-tag-num {
     // border-bottom: 1px solid $border-color;
     transition: 0.5s ease;
     // box-shadow: 0px 4px 5px 0px rgba(0,0,0,0.1);
-    box-shadow: 1px 2px 18px rgba(0,0,0,.1);
+    height: 70px;
+    &.scroll {
+        box-shadow: 1px 2px 18px rgba(0,0,0,.1);
+        height: 45px;
 
+    }
     .navbar-logo {
         font-size: 1.5rem;
         font-weight: 600;
@@ -97,10 +103,15 @@ i.article-tag-num {
 }
 
 .article {
-    margin-top: 1rem;
+    background: #fff;
+    margin-top: 1.25rem;
+    padding: 2rem;
+    box-shadow: 0px 0px 10px -2px rgba(158, 158, 158, 0.2);
+    border-width: 0;
+    border-radius: 4px;
     & + .article {
         padding-top: 2rem;
-        border-top: 1px solid $border-color;
+        // border-top: 1px solid $border-color;
     }
 
     .article-title a,
@@ -108,7 +119,8 @@ i.article-tag-num {
         color: inherit;
         border-bottom: 1px solid transparent;
         &:hover {
-            border-bottom-color: black;
+            border-bottom-color: #a5a5a5;
+            color: #3273dc;
         }
     }
 
@@ -134,7 +146,7 @@ i.article-tag-num {
     }
 
     .article-entry {
-        margin-bottom: 1.5rem;
+        // margin-bottom: 1.5rem;
         h1, h2, h3, h4, h5, h6 {
             cursor: pointer;
             position: relative;
@@ -369,7 +381,8 @@ i.article-tag-num {
     }
 
     .articles {
-        border-left: 1px solid $border-color;
+        // border-left: 1px solid $border-color;
+        border-left: none;
     }
     svg {
         margin-right: 0.5rem;
@@ -377,11 +390,12 @@ i.article-tag-num {
     .article {
         border-top: none;
         margin-left: -1px;
-        padding: 1rem 1.5rem;
+        padding: 1rem;
         border-left: 3px solid transparent;
 
         &:hover {
             border-left-color: black;
+            // border-left: none;
         }
 
         time {
@@ -393,10 +407,11 @@ i.article-tag-num {
             margin: 0;
             a {
                 color: inherit;
-                border-bottom: 1px dotted transparent;
+                border-bottom: 1px solid transparent;
 
                 &:hover {
                     border-bottom-color: darkgray;
+                    color: #3273dc;
                 }
             }
         }
@@ -631,12 +646,15 @@ figure.highlight {
     }
 }
 .section {
-    padding-top: 1rem;
+    padding-top: 0rem;
+    &:not(.section-heading):not(.section-tags){
+        margin-top: 3rem;
+    }
 }
 .section-heading {
     padding-bottom: 0;
     padding-top: 3rem;
-
+    margin-top: 0;
     h5 {
         margin-bottom: 0;
         text-transform: uppercase;
@@ -650,7 +668,6 @@ figure.highlight {
         padding-top: 2rem;
     }
 }
-
 .gallery-item {
     position: relative;
     display: inline-block;
@@ -731,7 +748,9 @@ figure.highlight {
 }
 #totop {
     position:fixed;
-    display:flex;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
     justify-content:center;
     bottom:2rem;
     right:1.7rem;
@@ -744,10 +763,20 @@ figure.highlight {
     align-items: center;
     box-shadow: $img-shadow;
     -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -webkit-transition: opacity 1s ease-in-out;
+    transition: all 0.3s ease-in-out;
     svg {
         display: block;
         margin: 0 auto;
         width: 60%;
+    }
+    &.scroll {
+        visibility: visible;
+        opacity: 1;
+    }
+    &:hover{
+        border-radius: 4px;
+        width: 3rem;
     }
 }
 @import "insight";

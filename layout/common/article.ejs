@@ -30,7 +30,7 @@
                     .join('<span>></span>') %>
         </span>
         <% } %>
-        <% if (!index && (!has_config('toc') || get_config('toc') === true)){ %>
+        <% if (!index && (!has_config('hot') || get_config('hot') === true)){ %>
         <span class="column is-narrow article-category">
             <span class="article-meta-separator">/</span>
             <svg class="icon" aria-hidden="true">
@@ -92,12 +92,5 @@
 <div class="comments">
     <h3 class="title is-4"><%= __('article.comments') %></h3>
     <%- partial('comment/' + get_config('comment.type')) %>
-</div>
-<% } %>
-<% if (!index) { %>
-<div id="totop">
-    <a title="Top"><svg class="icon" aria-hidden="true">
-    <use xlink:href="#icon-TOP"></use>
-    </svg></a>
 </div>
 <% } %>

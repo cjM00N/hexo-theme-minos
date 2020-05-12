@@ -1,92 +1,54 @@
 (function ($) {
-    $('.navbar-burger').click(function () {
-        $(this).toggleClass('is-active');
-        $('.navbar-main .navbar-start').toggleClass('is-active');
-        $('.navbar-main .navbar-end').toggleClass('is-active');
+    $(".navbar-burger").click(function () {
+        $(this).toggleClass("is-active");
+        $(".navbar-main .navbar-start").toggleClass("is-active");
+        $(".navbar-main .navbar-end").toggleClass("is-active");
     });
 
-    // Hide Header on on scroll down
-    var didScroll;
-    var lastScrollTop = 0;
-    var delta = 5;
-    var navbarHeight = $('.navbar-main').outerHeight();
-
-    $(window).scroll(function(event){
-        didScroll = true;
-    });
-
-    // setInterval(function() {
-    //     if (didScroll) {
-    //         hasScrolled();
-    //         didScroll = false;
-    //     }
-    // }, 250);
-
+    // change nav and totop button when scroll down
     function hasScrolled() {
-        var st = $(this).scrollTop();
-
-        // Make sure they scroll more than delta
-        if(Math.abs(lastScrollTop - st) <= delta) {
-            return;
-        }
-
-        // If they scrolled down and are past the navbar, add class .navbar-down.
-        // This is necessary so you never see what is "behind" the navbar.
-        if (st > lastScrollTop && st > navbarHeight) {
-            var posY = Math.min(st, navbarHeight);
-            // Scroll Down
-            $('.navbar-main').css({
-                '-webkit-transform' : 'translateY(-' + posY + 'px)',
-                '-moz-transform'    : 'translateY(-' + posY + 'px)',
-                '-ms-transform'     : 'translateY(-' + posY + 'px)',
-                '-o-transform'      : 'translateY(-' + posY + 'px)',
-                'transform'         : 'translateY(-' + posY + 'px)',
-                'box-shadow'        : 'none'
-            });
+        if (window.scrollY > 30) {
+            // scroll Down
+            $(".navbar-main").addClass("scroll");
+            $("#totop").addClass("scroll");
         } else {
-            // Scroll Up
-            if(st + $(window).height() < $(document).height()) {
-                $('.navbar-main').css({
-                    '-webkit-transform' : 'translateY(0px)',
-                    '-moz-transform'    : 'translateY(0px)',
-                    '-ms-transform'     : 'translateY(0px)',
-                    '-o-transform'      : 'translateY(0px)',
-                    'transform'         : 'translateY(0px)',
-                    'box-shadow'        : '1px 2px 18px rgba(0,0,0,.1)'
-                });
-            }
+            // scroll in the top
+            $(".navbar-main").removeClass("scroll");
+            $("#totop").removeClass("scroll");
         }
-
-        lastScrollTop = st;
     }
+    window.addEventListener("scroll", hasScrolled);
 
     $('.article.gallery img:not(".not-gallery-item")').each(function () {
         // wrap images with link and add caption if possible
-        if ($(this).parent('a').length === 0) {
-            $(this).wrap('<a class="gallery-item" href="' + $(this).attr('src') + '"></a>');
+        if ($(this).parent("a").length === 0) {
+            $(this).wrap(
+                '<a class="gallery-item" href="' +
+                    $(this).attr("src") +
+                    '"></a>'
+            );
             if (this.alt) {
-                $(this).after('<div class="caption">' + this.alt + '</div>');
+                $(this).after('<div class="caption">' + this.alt + "</div>");
             }
         }
     });
+    $(".article-entry")
+        .find("h1, h2, h3, h4, h5, h6")
+        .on("click", function () {
+            if ($(this).get(0).id) {
+                window.location.hash = $(this).get(0).id;
+            }
+        });
 
-    $('.article-entry').find('h1, h2, h3, h4, h5, h6').on('click', function () {
-        if ($(this).get(0).id) {
-            window.location.hash = $(this).get(0).id;
-        }
-    });
-
-    if (typeof(moment) === 'function') {
-        $('.article-meta time').each(function () {
-            $(this).text(moment($(this).attr('datetime')).format('ll'));//.fromNow());
+    if (typeof moment === "function") {
+        $(".article-meta time").each(function () {
+            $(this).text(moment($(this).attr("datetime")).format("ll")); //.fromNow());
         });
     }
-})(jQuery);
-(function($) { 
-	var scrollElem = $('#totop');
-	// Scroll to top speed
-	var scrollSpeed = 500;
-	$(scrollElem).click(function(){
-		$('html, body').animate({scrollTop:0}, scrollSpeed); return false;
-	});
+    // totop button setttings
+    var scrollSpeed = 500;
+    $("#totop").click(function () {
+        $("html, body").animate({ scrollTop: 0 }, scrollSpeed);
+    });
+
 })(jQuery);

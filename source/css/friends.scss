@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.friends-container {
+    /* background: #fff; */
+    margin: 0 auto;
+    padding: 2rem 0;
+    width: 70vw;
+    display: -ms-grid;
+    display: grid;
+    gap: 15px;
+    -ms-grid-columns: (1fr) [2];
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media screen and (max-width: 1000px) {
+    .friends-container {
+        width: 95%;
+        display: block;
+    }
+}
+
+.friends-container .friend-card {
+    background: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 10px;
+    -webkit-box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+@media screen and (max-width: 1000px) {
+    .friends-container .friend-card {
+        margin-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.friends-container .avatar {
+    width: 110px;
+    height: 110px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 1000px) {
+    .friends-container .avatar {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+.friends-container .intro {
+    padding-left: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.friends-container .intro h3 {
+    color: #555;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+.friends-container .intro p {
+    color: #555;
+}
+
+.friends-container .intro a {
+    color: #3b8bd0;
+    text-decoration: none;
+}

@@ -12,13 +12,14 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="<%- url_for('/' + (!is_default_language(page_language()) ? page_language() : '')) %>">
+            <a class="navbar-item navbar-logo"
+                href="<%- url_for('/' + (!is_default_language(page_language()) ? page_language() : '')) %>">
                 <% if (has_config('logo') && get_config('logo')) { %>
-                    <% if (has_config('logo.text') && get_config('logo.text')) { %>
-                    <%= get_config('logo.text') %>
-                    <% } else { %>
-                    <img src="<%- url_for(get_config('logo')) %>" alt="" height="28">
-                    <% } %>
+                <% if (has_config('logo.text') && get_config('logo.text')) { %>
+                <%= get_config('logo.text') %>
+                <% } else { %>
+                <img src="<%- url_for(get_config('logo')) %>" alt="" height="28">
+                <% } %>
                 <% } else { %>
                 <img src="<%- url_for('images/logo.png') %>" alt="" height="28">
                 <% } %>
@@ -33,23 +34,16 @@
         <div class="navbar-menu navbar-start">
             <% for (let i in get_config('menu')) { let menu = get_config('menu')[i]; %>
             <a class="navbar-item <% if (typeof(page.path) !== 'undefined' && is_same_link(menu, page.path)) { %>is-active<% } %>"
-               href="<%- url_for(menu) %>"><%= i %></a>
+                href="<%- url_for(menu) %>"><%= i %></a>
             <% } %>
         </div>
         <% } %>
         <div class="navbar-menu navbar-end">
-            <% if (has_config('search')) { %>
-            <a class="navbar-item search" title="<%= __('nav.search') %>" href="javascript:;">
-                <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-search1"></use>
-                </svg>
-            </a>
-            <% } %>
             <% if (has_config('toc') && get_config('toc') === true && typeof(page.content) !== 'undefined') { %>
             <div class="navbar-item is-hoverable has-dropdown is-hidden-tablet-only toc">
                 <a class="navbar-item" title="<%= __('nav.toc') %>">
                     <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-list"></use>
+                        <use xlink:href="#icon-list"></use>
                     </svg>
                 </a>
                 <div class="navbar-dropdown is-right">
@@ -59,10 +53,18 @@
                     <hr class="navbar-divider">
                     <% } %>
                     <% lastHeading = heading[0].split('.')[0]; %>
-                    <a class="navbar-item" href="#<%= heading[1] %>"><%= heading[0] %>&nbsp;&nbsp;<%- heading[3] === 1 ? '<b>' : '' %><%= heading[2] %><%- heading[3] === 1 ? '</b>' : '' %></a>
+                    <a class="navbar-item"
+                        href="#<%= heading[1] %>"><%= heading[0] %>&nbsp;&nbsp;<%- heading[3] === 1 ? '<b>' : '' %><%= heading[2] %><%- heading[3] === 1 ? '</b>' : '' %></a>
                     <% } %>
                 </div>
             </div>
+            <% } %>
+            <% if (has_config('search')) { %>
+            <a class="navbar-item search" title="<%= __('nav.search') %>" href="javascript:;">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-search1"></use>
+                </svg>
+            </a>
             <% } %>
             <% if (has_config('navbar_links')) {
                 for (let name in get_config('navbar_links')) {
@@ -72,11 +74,11 @@
                 <%= name %>
                 <% } else { %>
                 <svg class="icon" aria-hidden="true">
-                <use xlink:href="#<%= link.icon %>"></use>
+                    <use xlink:href="#<%= link.icon %>"></use>
                 </svg>
                 <% } %>
             </a>
-               <% } %>
+            <% } %>
             <% } %>
         </div>
     </div>
